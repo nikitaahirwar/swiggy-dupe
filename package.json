@@ -1,0 +1,38 @@
+{
+  "name": "swiggy-dupe",
+  "version": "1.0.0",
+  "description": "This is swiggy like website",
+  "keywords": [
+    "swiggy",
+    "nikita",
+    "ahirwar",
+    "react"
+  ],
+  "homepage": "https://github.com/nikitaahirwar/swiggy-dupe#readme",
+  "bugs": {
+    "url": "https://github.com/nikitaahirwar/swiggy-dupe/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikitaahirwar/swiggy-dupe.git"
+  },
+  "license": "ISC",
+  "author": "Nikita Ahirwar",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^6.28.2"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
