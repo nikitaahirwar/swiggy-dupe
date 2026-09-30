@@ -26,23 +26,23 @@ const Body = () => {
     if(!onlineStatus) return <h1>🔴 You are offline. Please check your internet connection.</h1>
 
     return (
-        <div className="body">
-            <div className="filters">
-                <div className="search">
-                    <input className="search-input" type="text" placeholder="Search for restaurants" onChange={(e) => {setSearchText(e.target.value)}}/>
-                    <input className="search-button" type="button" value="Search" onClick={() => {
+        <div>
+            <div className="flex justify-between p-4">
+                <div>
+                    <input className="border border-gray-300 rounded py-2 px-4 mr-2" type="text" placeholder="Search for restaurants" onChange={(e) => {setSearchText(e.target.value)}}/>
+                    <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" value="Search" onClick={() => {
                         const filtered = restaurants.filter(restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
                         setFilteredRestaurants(filtered);
                     }}/>
                 </div>
                 <div className="top-rated">
-                    <input className="top-rated-button" type="button" value="Top Rated" onClick={() => {
+                    <input className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button" value="Top Rated" onClick={() => {
                         const topRated = restaurants.filter(restaurant => restaurant.info.avgRating > 4.5);
                         setFilteredRestaurants(topRated);
                     }}/>
                 </div>
             </div>
-            <div className="restaurant-list">
+            <div className="flex flex-wrap">
                 {
                     filteredRestaurants.length === 0 ? (
                         <RestaurantCardShimmer />
