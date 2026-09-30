@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard.js";
 import RestaurantCardShimmer from "./RestaurantCardShimmer.js";
 import { FETCH_RESTAURANTS_URL } from "../utils/constants.js";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Body = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const onlineStatus = useOnlineStatus();
 
     useEffect(()=>{
         fetchData();
@@ -19,6 +22,8 @@ const Body = () => {
         setRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
         setFilteredRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
     }
+
+    if(!onlineStatus) return <h1>🔴 You are offline. Please check your internet connection.</h1>
 
     return (
         <div className="body">
@@ -43,10 +48,12 @@ const Body = () => {
                         <RestaurantCardShimmer />
                     ) : (
                     filteredRestaurants.map(restaurant => (
-                        <RestaurantCard
-                            key={restaurant.info.id} 
-                            restaurant={restaurant}
-                        />
+                        <Link to={"restaurant-menu/"+ restaurant.info.id} key={restaurant.info.id}>
+                            <RestaurantCard
+                                key={restaurant.info.id} 
+                                restaurant={restaurant}
+                            />
+                        </Link>
                     )))
                 }
             </div>
