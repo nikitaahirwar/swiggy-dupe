@@ -4,12 +4,14 @@ import RestaurantCardShimmer from "./RestaurantCardShimmer.js";
 import { FETCH_RESTAURANTS_URL } from "../utils/constants.js";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import { withPromotedLabel } from "./RestaurantCard.js";
 
 const Body = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [searchText, setSearchText] = useState("");
     const onlineStatus = useOnlineStatus();
+    const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
 
     useEffect(()=>{
         fetchData();
@@ -49,10 +51,14 @@ const Body = () => {
                     ) : (
                     filteredRestaurants.map(restaurant => (
                         <Link to={"restaurant-menu/"+ restaurant.info.id} key={restaurant.info.id}>
+                            {restaurant.info.promoted ? (
+                                <RestaurantCardWithPromotedLabel restaurant={restaurant}/>
+                            ) : (
                             <RestaurantCard
                                 key={restaurant.info.id} 
                                 restaurant={restaurant}
                             />
+                            )}
                         </Link>
                     )))
                 }
