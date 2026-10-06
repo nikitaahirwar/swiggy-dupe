@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestaurantCard from "./RestaurantCard.js";
 import RestaurantCardShimmer from "./RestaurantCardShimmer.js";
 import { FETCH_RESTAURANTS_URL } from "../utils/constants.js";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 import { withPromotedLabel } from "./RestaurantCard.js";
+import UserContext from "../utils/UserContext.js";
 
 const Body = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -12,6 +13,8 @@ const Body = () => {
     const [searchText, setSearchText] = useState("");
     const onlineStatus = useOnlineStatus();
     const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
+    const { loggedInUser, setUserName } = useContext(UserContext);
+
 
     useEffect(()=>{
         fetchData();
@@ -36,6 +39,9 @@ const Body = () => {
                         const filtered = restaurants.filter(restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
                         setFilteredRestaurants(filtered);
                     }}/>
+                </div>
+                <div>
+                    <input className="border border-gray-300 rounded py-2 px-4" value={loggedInUser} onChange={(e) => setUserName(e.target.value)} />
                 </div>
                 <div className="top-rated">
                     <input className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button" value="Top Rated" onClick={() => {

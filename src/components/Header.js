@@ -1,11 +1,16 @@
 import {Link} from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus.js"
+import { useContext } from "react";
+import userContext from "../utils/UserContext.js";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const onlineStatus = useOnlineStatus();
+    const { loggedInUser } = useContext(userContext);
+    const cartItems = useSelector((store) => store.cart.items)
 
     return (
-        <div className="flex justify-between p-4 shadow-lg bg-blue-100">
+        <div className="flex justify-between p-4 shadow-lg bg-blue-100 fixed top-0 w-full">
             <div>
                 <img className="w-[60px]" src='https://png.pngtree.com/png-vector/20220705/ourmid/pngtree-food-logo-png-image_5687686.png' alt="food logo"/>
             </div>
@@ -15,7 +20,8 @@ const Header = () => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
-                    <li><Link to="/cart">Cart</Link></li>
+                    <li className="font-bold"><Link to="/cart">Cart({cartItems.length} items)</Link></li>
+                    <li className="font-bold">{loggedInUser}</li>
                 </ul>
             </div>
         </div>

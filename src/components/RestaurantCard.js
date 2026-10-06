@@ -1,5 +1,9 @@
 import { IMG_CDN_URL } from "../utils/constants.js";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext.js";
+
 const RestaurantCard = (props) => {
+    const { loggedInUser } = useContext(UserContext);
     const { cloudinaryImageId, name, cuisines, avgRating } = props.restaurant.info;
     return (
         <div className="w-[250px] h-[380px] p-2 m-2 shadow-lg bg-gray-200 hover:bg-gray-300 rounded-lg">
@@ -7,6 +11,7 @@ const RestaurantCard = (props) => {
             <h3 className="font-bold text-lg py-2">{name}</h3>
             <p className="py-1">{cuisines.join(", ")}</p>
             <p className="py-1">Rating: {avgRating}</p>
+            <p className="py-1">User: {loggedInUser}</p>
         </div>
     )
 }

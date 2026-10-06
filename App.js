@@ -7,18 +7,24 @@ import Error from "./src/components/Error.js"
 import RestaurantMenu from "./src/components/RestaurantMenu.js"
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.css"
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
+import UserContext from "./src/utils/UserContext.js";
+import { Provider } from "react-redux";
+import appStore from "./src/utils/appStore.js";
 
 const About = lazy(() => import('./src/components/About.js'))
 
-
 const App = () => {
+    const [userName, setUserName] = useState("Nikita");
     return (
-        <>
-            <Header />
-            <Outlet />
-        </>
-        
+        <Provider store={appStore}>
+            <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+                <Header />
+                <div className="mt-[100px]">
+                    <Outlet />
+                </div>            
+            </UserContext.Provider>
+        </Provider>
     )
 }
 
