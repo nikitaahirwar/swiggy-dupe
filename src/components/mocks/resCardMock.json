@@ -1,0 +1,93 @@
+{
+    "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
+    "info": {
+        "id": "8174",
+        "name": "Corner House Ice Cream",
+        "cloudinaryImageId": "vaztnu7dffyzzcd9fka6",
+        "locality": "7th Sector",
+        "areaName": "Hsr Layout",
+        "costForTwo": "₹250 for two",
+        "cuisines": [
+            "Ice Cream",
+            "Desserts"
+        ],
+        "avgRating": 4.7,
+        "parentId": "65254",
+        "avgRatingString": "4.7",
+        "totalRatingsString": "74K+",
+        "sla": {
+            "deliveryTime": 53,
+            "lastMileTravel": 5,
+            "serviceability": "SERVICEABLE",
+            "slaString": "50-60 mins",
+            "lastMileTravelString": "5.0 km",
+            "iconType": "ICON_TYPE_EMPTY"
+        },
+        "availability": {
+            "nextCloseTime": "2026-10-07 23:00:00",
+            "opened": true
+        },
+        "badges": {
+            "imageBadges": [
+                {
+                    "imageId": "brand_cards/Badges%202026/56_Best%20in%20Ice%20Cream2026.png",
+                    "description": "Top-rated for Ice Cream, based on user votes."
+                }
+            ]
+        },
+        "isOpen": true,
+        "aggregatedDiscountInfoV2": {},
+        "type": "F",
+        "badgesV2": {
+            "entityBadges": {
+                "imageBased": {
+                    "badgeObject": [
+                        {
+                            "attributes": {
+                                "description": "Top-rated for Ice Cream, based on user votes.",
+                                "imageId": "brand_cards/Badges%202026/56_Best%20in%20Ice%20Cream2026.png",
+                                "theme": ""
+                            }
+                        }
+                    ]
+                },
+                "textBased": {},
+                "textExtendedBadges": {}
+            }
+        },
+        "orderabilityCommunication": {
+            "title": {},
+            "subTitle": {},
+            "message": {},
+            "customIcon": {},
+            "commsStyling": {}
+        },
+        "differentiatedUi": {
+            "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+            "differentiatedUiMediaDetails": {
+                "mediaType": "ADS_MEDIA_ENUM_IMAGE",
+                "lottie": {},
+                "video": {}
+            }
+        },
+        "reviewsSummary": {},
+        "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+        "restaurantOfferPresentationInfo": {},
+        "externalRatings": {
+            "aggregatedRating": {
+                "rating": "--"
+            }
+        },
+        "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY",
+        "priceComparisonComms": {}
+    },
+    "analytics": {
+        "context": "seo-data-5ceb14b1-0e98-4deb-bbe5-1e09484dbac9"
+    },
+    "cta": {
+        "link": "https://www.swiggy.com/city/bangalore/corner-house-ice-cream-7th-sector-hsr-layout-rest8174",
+        "text": "RESTAURANT_MENU",
+        "type": "WEBLINK"
+    },
+    "widgetId": "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+}

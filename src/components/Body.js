@@ -23,7 +23,6 @@ const Body = () => {
     const fetchData = async() => {
         const data = await fetch(FETCH_RESTAURANTS_URL);
         const json = await data.json();
-        console.log('json data', json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
         setRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
         setFilteredRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
     }
@@ -34,7 +33,7 @@ const Body = () => {
         <div>
             <div className="flex justify-between p-4">
                 <div>
-                    <input className="border border-gray-300 rounded py-2 px-4 mr-2" type="text" placeholder="Search for restaurants" onChange={(e) => {setSearchText(e.target.value)}}/>
+                    <input data-testid="search-input" className="border border-gray-300 rounded py-2 px-4 mr-2" type="text" placeholder="Search for restaurants" onChange={(e) => {setSearchText(e.target.value)}}/>
                     <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" value="Search" onClick={() => {
                         const filtered = restaurants.filter(restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
                         setFilteredRestaurants(filtered);
@@ -61,7 +60,7 @@ const Body = () => {
                                 <RestaurantCardWithPromotedLabel restaurant={restaurant}/>
                             ) : (
                             <RestaurantCard
-                                key={restaurant.info.id} 
+                                key={restaurant.info.id}
                                 restaurant={restaurant}
                             />
                             )}

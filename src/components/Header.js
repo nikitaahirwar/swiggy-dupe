@@ -1,12 +1,13 @@
 import {Link} from "react-router-dom"
 import useOnlineStatus from "../utils/useOnlineStatus.js"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import userContext from "../utils/UserContext.js";
 import { useSelector } from "react-redux";
 
 const Header = () => {
     const onlineStatus = useOnlineStatus();
     const { loggedInUser } = useContext(userContext);
+    const [loggedIn, setLoggedIn] = useState(true);
     const cartItems = useSelector((store) => store.cart.items)
 
     return (
@@ -21,6 +22,11 @@ const Header = () => {
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
                     <li className="font-bold"><Link to="/cart">Cart({cartItems.length} items)</Link></li>
+                    <li>
+                        <button onClick={() => setLoggedIn(!loggedIn)}>
+                            {loggedIn ? 'Login' : 'Logout'}
+                        </button>
+                    </li>
                     <li className="font-bold">{loggedInUser}</li>
                 </ul>
             </div>
