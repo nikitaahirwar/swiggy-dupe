@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between p-4 shadow-lg bg-blue-100 fixed top-0 w-full z-1">
+    <div className="flex justify-between p-1 md:p-4 shadow-lg bg-blue-100 fixed top-0 w-screen z-1">
       <div>
         <img
           className="w-15"
@@ -33,12 +33,12 @@ const Header = () => {
         />
       </div>
       <div className="flex items-center">
-        <ul className="flex gap-4 text-lg font-semibold text-orange-400">
-          <li>{onlineStatus ? "Online" : "Offline 🔴"}</li>
+        <ul className="flex gap-2 md:gap-4 text-sm md:text-lg font-semibold text-orange-400">
+          <li>{onlineStatus ? "🟢" : "🔴"}</li>
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="hidden md:inline-block">
             <Link to="/about">About</Link>
           </li>
           <li>
@@ -52,7 +52,7 @@ const Header = () => {
               Logout
             </button>
           </li>
-          <li className="font-bold">{loggedInUser}</li>
+          <li className="hidden md:inline-block font-bold">{loggedInUser}</li>
         </ul>
       </div>
     </div>

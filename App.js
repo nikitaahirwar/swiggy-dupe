@@ -18,7 +18,6 @@ const About = lazy(() => import("./src/components/About.js"));
 const App = () => {
   const [userName, setUserName] = useState("Nikita");
   const user = useSelector((store) => store.user);
-  console.log("userrr", user);
   return (
     <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
       {user ? (

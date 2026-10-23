@@ -82,7 +82,7 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col bg-gray-300 w-1/2 m-auto p-4 my-40"
+      className="flex flex-col bg-gray-300 w-[90%] md:w-1/2 m-auto p-4 my-20 md:my-40"
     >
       <h1 className="text-3xl text-amber-600 font-bold p-1 m-2">
         {isSignedInForm ? "Login" : "Signup"}

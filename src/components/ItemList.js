@@ -28,7 +28,7 @@ const ItemList = ({ itemCards }) => {
             <div className="text-sm">Price: ₹{item.card.info.price / 100}</div>
           </div>
           <div className="w-3/12 ">
-            <div className="bg-green-500 text-white px-2 py-1 rounded-md absolute mt-30 ml-10">
+            <div className="bg-green-500 text-white px-2 py-1 rounded-md absolute mt-30 ml-1 md:ml-10">
               <button
                 className="px-2 cursor-pointer"
                 onClick={() => handleRemoveItem(item.card.info.id)}

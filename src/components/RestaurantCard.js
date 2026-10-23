@@ -9,17 +9,17 @@ const RestaurantCard = (props) => {
   return (
     <div
       data-testid="restaurant-card"
-      className="w-62.5 h-99 p-2 m-2 shadow-lg bg-gray-200 hover:bg-gray-300 rounded-lg"
+      className="w-45 md:w-62.5 h-70 md:h-99 p-2 m-2 text-sm md:text-md shadow-lg bg-gray-200 hover:bg-gray-300 rounded-lg"
     >
       <img
-        className="border border-gray-400 rounded w-full h-50"
+        className="border border-gray-400 rounded w-full h-30 md:h-50"
         src={`${IMG_CDN_URL}${cloudinaryImageId}`}
         alt="restaurant"
       />
-      <h3 className="font-bold text-lg py-2">{name}</h3>
+      <h3 className="font-bold md:text-lg py-2">{name}</h3>
       <p className="py-1">{cuisines.join(", ")}</p>
       <p className="py-1">Rating: {avgRating}</p>
-      <p className="py-1">User: {loggedInUser}</p>
+      <p className="py-1 md:inline-block hidden">User: {loggedInUser}</p>
     </div>
   );
 };

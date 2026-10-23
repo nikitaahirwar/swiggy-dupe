@@ -8,67 +8,101 @@ import { withPromotedLabel } from "./RestaurantCard.js";
 import UserContext from "../utils/UserContext.js";
 
 const Body = () => {
-    const [restaurants, setRestaurants] = useState([]);
-    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-    const [searchText, setSearchText] = useState("");
-    const onlineStatus = useOnlineStatus();
-    const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
-    const { loggedInUser, setUserName } = useContext(UserContext);
+  const [restaurants, setRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const onlineStatus = useOnlineStatus();
+  const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    useEffect(()=>{
-        fetchData();
-    },[])
+  const fetchData = async () => {
+    const data = await fetch(FETCH_RESTAURANTS_URL);
+    const json = await data.json();
+    setRestaurants(
+      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
+    );
+    setFilteredRestaurants(
+      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
+    );
+  };
 
-    const fetchData = async() => {
-        const data = await fetch(FETCH_RESTAURANTS_URL);
-        const json = await data.json();
-        setRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
-        setFilteredRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
-    }
+  if (!onlineStatus)
+    return <h1>🔴 You are offline. Please check your internet connection.</h1>;
 
-    if(!onlineStatus) return <h1>🔴 You are offline. Please check your internet connection.</h1>
-
-    return (
+  return (
+    <div>
+      <div className="flex justify-between p-1 md:p-4 text-sm md:text-lg w-screen">
         <div>
-            <div className="flex justify-between p-4">
-                <div>
-                    <input data-testid="search-input" className="border border-gray-300 rounded py-2 px-4 mr-2" type="text" placeholder="Search for restaurants" onChange={(e) => {setSearchText(e.target.value)}}/>
-                    <input className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button" value="Search" onClick={() => {
-                        const filtered = restaurants.filter(restaurant => restaurant.info.name.toLowerCase().includes(searchText.toLowerCase()));
-                        setFilteredRestaurants(filtered);
-                    }}/>
-                </div>
-                <div>
-                    <input className="border border-gray-300 rounded py-2 px-4" value={loggedInUser} onChange={(e) => setUserName(e.target.value)} />
-                </div>
-                <div className="top-rated">
-                    <input className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="button" value="Top Rated" onClick={() => {
-                        const topRated = restaurants.filter(restaurant => restaurant.info.avgRating > 4.5);
-                        setFilteredRestaurants(topRated);
-                    }}/>
-                </div>
-            </div>
-            <div className="flex flex-wrap">
-                {
-                    filteredRestaurants.length === 0 ? (
-                        <RestaurantCardShimmer />
-                    ) : (
-                    filteredRestaurants.map(restaurant => (
-                        <Link to={"restaurant-menu/"+ restaurant.info.id} key={restaurant.info.id}>
-                            {restaurant.info.promoted ? (
-                                <RestaurantCardWithPromotedLabel restaurant={restaurant}/>
-                            ) : (
-                            <RestaurantCard
-                                key={restaurant.info.id}
-                                restaurant={restaurant}
-                            />
-                            )}
-                        </Link>
-                    )))
-                }
-            </div>
+          <input
+            data-testid="search-input"
+            className="border border-gray-300 rounded py-2 px-1 md:px-4 mr-2"
+            type="text"
+            placeholder="Search for restaurants"
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <input
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="button"
+            value="Search"
+            onClick={() => {
+              const filtered = restaurants.filter((restaurant) =>
+                restaurant.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase()),
+              );
+              setFilteredRestaurants(filtered);
+            }}
+          />
         </div>
-    )
-}
-export default Body
+        <div className="md:inline-block hidden">
+          <input
+            className="border border-gray-300 rounded py-2 px-4"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
+        <div className="top-rated">
+          <input
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            type="button"
+            value="Top Rated"
+            onClick={() => {
+              const topRated = restaurants.filter(
+                (restaurant) => restaurant.info.avgRating > 4.5,
+              );
+              setFilteredRestaurants(topRated);
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex flex-wrap">
+        {filteredRestaurants.length === 0 ? (
+          <RestaurantCardShimmer />
+        ) : (
+          filteredRestaurants.map((restaurant) => (
+            <Link
+              to={"restaurant-menu/" + restaurant.info.id}
+              key={restaurant.info.id}
+            >
+              {restaurant.info.promoted ? (
+                <RestaurantCardWithPromotedLabel restaurant={restaurant} />
+              ) : (
+                <RestaurantCard
+                  key={restaurant.info.id}
+                  restaurant={restaurant}
+                />
+              )}
+            </Link>
+          ))
+        )}
+      </div>
+    </div>
+  );
+};
+export default Body;

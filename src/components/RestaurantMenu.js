@@ -33,7 +33,7 @@ const RestaurantMenu = () => {
     );
 
   return (
-    <div className="w-6/12 mx-auto my-4">
+    <div className="md:w-6/12 mx-1 md:mx-auto my-4">
       <div className="menu-details">
         <div className="font-bold text-3xl mb-5">{name}</div>
         <div>
@@ -62,7 +62,7 @@ const RestaurantMenu = () => {
             }}
           />
         ))}
-        <div className="w-178 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
+        <div className="w-screen md:w-178 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
           <div>{cartItems.length} item added</div>
           <div>
             <Link to="/cart">View Cart</Link>

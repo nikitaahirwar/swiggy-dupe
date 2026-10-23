@@ -18,7 +18,7 @@ const Cart = () => {
   }, [items]);
 
   return (
-    <div className="w-6/12 m-auto">
+    <div className="md:w-6/12 m-1 md:m-auto">
       <button
         className="bg-green-500 text-white cursor-pointer border rounded-md px-4 py-2"
         onClick={() => dispatch(clearCart())}
@@ -26,7 +26,7 @@ const Cart = () => {
         Clear Cart
       </button>
       <ItemList itemCards={items} />
-      <div className="w-178 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
+      <div className="w-screen md:w-178 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
         <div>Total: {total / 100} Rs/-</div>
         <div>Proceed to pay</div>
       </div>
