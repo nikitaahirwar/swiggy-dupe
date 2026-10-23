@@ -9,7 +9,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.css";
 import { lazy, Suspense, useState } from "react";
 import UserContext from "./src/utils/UserContext.js";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import appStore from "./src/utils/appStore.js";
 import Login from "./src/components/Login.js";
 
@@ -17,22 +17,21 @@ const About = lazy(() => import("./src/components/About.js"));
 
 const App = () => {
   const [userName, setUserName] = useState("Nikita");
-  const isLoggedIn = false;
+  const user = useSelector((store) => store.user);
+  console.log("userrr", user);
   return (
-    <Provider store={appStore}>
-      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-        {isLoggedIn ? (
-          <>
-            <Header />
-            <div className="mt-25">
-              <Outlet />
-            </div>
-          </>
-        ) : (
-          <Login />
-        )}
-      </UserContext.Provider>
-    </Provider>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      {user ? (
+        <>
+          <Header />
+          <div className="mt-25">
+            <Outlet />
+          </div>
+        </>
+      ) : (
+        <Login />
+      )}
+    </UserContext.Provider>
   );
 };
 
@@ -68,7 +67,15 @@ const appRouter = createBrowserRouter([
     ],
     errorElement: <Error />,
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <Provider store={appStore}>
+    <RouterProvider router={appRouter} />
+  </Provider>,
+);

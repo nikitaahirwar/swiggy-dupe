@@ -1,14 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import userContext from "../utils/UserContext.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../utils/userSlice.js";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase.js";
 
 const Header = () => {
   const onlineStatus = useOnlineStatus();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loggedInUser } = useContext(userContext);
-  const [loggedIn, setLoggedIn] = useState(true);
   const cartItems = useSelector((store) => store.cart.items);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (error) {
+      alert("Logout failed:", error);
+    }
+  };
 
   return (
     <div className="flex justify-between p-4 shadow-lg bg-blue-100 fixed top-0 w-full z-1">
@@ -35,8 +48,8 @@ const Header = () => {
             <Link to="/cart">Cart({cartItems.length} items)</Link>
           </li>
           <li>
-            <button onClick={() => setLoggedIn(!loggedIn)}>
-              {loggedIn ? "Login" : "Logout"}
+            <button className="cursor-pointer" onClick={handleLogout}>
+              Logout
             </button>
           </li>
           <li className="font-bold">{loggedInUser}</li>
