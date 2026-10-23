@@ -26,7 +26,7 @@ const Cart = () => {
         Clear Cart
       </button>
       <ItemList itemCards={items} />
-      <div className="w-screen md:w-178 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
+      <div className="w-screen md:w-6/12 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
         <div>Total: {total / 100} Rs/-</div>
         <div>Proceed to pay</div>
       </div>

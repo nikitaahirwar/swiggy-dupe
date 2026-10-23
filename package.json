@@ -22,7 +22,7 @@
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir build"
   },
   "devDependencies": {
     "@babel/core": "^8.0.6",

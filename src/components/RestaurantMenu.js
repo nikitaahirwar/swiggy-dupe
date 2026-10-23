@@ -62,7 +62,7 @@ const RestaurantMenu = () => {
             }}
           />
         ))}
-        <div className="w-screen md:w-178 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
+        <div className="w-screen md:w-6/12 fixed bottom-0 p-2 my-2 bg-green-400 flex justify-between text-white font-bold">
           <div>{cartItems.length} item added</div>
           <div>
             <Link to="/cart">View Cart</Link>
