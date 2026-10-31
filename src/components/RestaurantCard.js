@@ -1,9 +1,6 @@
 import { IMG_CDN_URL } from "../utils/constants.js";
-import { useContext } from "react";
-import UserContext from "../utils/UserContext.js";
 
 const RestaurantCard = (props) => {
-  const { loggedInUser } = useContext(UserContext);
   const { cloudinaryImageId, name, cuisines, avgRating } =
     props.restaurant.info;
   return (
@@ -19,7 +16,6 @@ const RestaurantCard = (props) => {
       <h3 className="font-bold md:text-lg py-2">{name}</h3>
       <p className="py-1">{cuisines.join(", ")}</p>
       <p className="py-1">Rating: {avgRating}</p>
-      <p className="py-1 md:inline-block hidden">User: {loggedInUser}</p>
     </div>
   );
 };

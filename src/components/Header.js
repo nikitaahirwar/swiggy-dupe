@@ -1,17 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
-import { useContext } from "react";
-import userContext from "../utils/UserContext.js";
-import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../utils/userSlice.js";
+import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase.js";
 
 const Header = () => {
   const onlineStatus = useOnlineStatus();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loggedInUser } = useContext(userContext);
   const cartItems = useSelector((store) => store.cart.items);
 
   const handleLogout = async () => {
@@ -52,7 +47,6 @@ const Header = () => {
               Logout
             </button>
           </li>
-          <li className="hidden md:inline-block font-bold">{loggedInUser}</li>
         </ul>
       </div>
     </div>

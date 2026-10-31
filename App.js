@@ -7,8 +7,7 @@ import Error from "./src/components/Error.js";
 import RestaurantMenu from "./src/components/RestaurantMenu.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.css";
-import { lazy, Suspense, useState } from "react";
-import UserContext from "./src/utils/UserContext.js";
+import { lazy, Suspense } from "react";
 import { Provider, useSelector } from "react-redux";
 import appStore from "./src/utils/appStore.js";
 import Login from "./src/components/Login.js";
@@ -16,10 +15,9 @@ import Login from "./src/components/Login.js";
 const About = lazy(() => import("./src/components/About.js"));
 
 const App = () => {
-  const [userName, setUserName] = useState("Nikita");
   const user = useSelector((store) => store.user);
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+    <>
       {user ? (
         <>
           <Header />
@@ -30,7 +28,7 @@ const App = () => {
       ) : (
         <Login />
       )}
-    </UserContext.Provider>
+    </>
   );
 };
 
